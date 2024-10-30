@@ -3,7 +3,10 @@ package org.example;
 import java.util.Scanner;
 
 public class Menu {
-    public static void ShowMenu() {
+    
+    
+    public void ShowMenu() {
+            
         while (true) {
 
             String RESET = "\u001B[0m";
@@ -36,7 +39,7 @@ public class Menu {
 
             switch (choice) {
                 case 1:
-                    //game();
+                    showPlayerMenu();
                     break;
                 case 2:
                     ShowSettings();
@@ -54,7 +57,10 @@ public class Menu {
         System.out.println("\033[H\033[2J");
         System.out.flush();
     }
-    public  static  void ShowSettings(){
+    private static AI comp = new AI();
+    
+    public static void ShowSettings(){
+        
         clearscrn();
         Scanner sc = new Scanner(System.in);
         System.out.println(" _______  _______  _______  _______  ___   __    _  _______  _______ \n" +
@@ -65,7 +71,7 @@ public class Menu {
                 " _____| ||   |___   |   |    |   |  |   | | | |   ||   |_| | _____| |\n" +
                 "|_______||_______|  |___|    |___|  |___| |_|  |__||_______||_______|");
 
-
+        System.out.println("1. change AI strength. Current - " + comp.getAiDifficulty());
         System.out.println("4.go back");
         System.out.println("select a choice:");
         int choice = sc.nextInt();
@@ -82,6 +88,26 @@ public class Menu {
             default:
                 System.out.println("Select a valid option!");
                 break;
+        }
+    }
+    public static void showPlayerMenu(){
+        int choice = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("how many players are going to play:");
+        System.out.println("1. One player (play with AI)");
+        System.out.println("2. two players (play against each other)");
+        System.out.println("3. cancel");
+        System.out.print("give choice: ");
+        switch (sc.nextInt()) {
+            case 1:
+                //PlayGameAI
+                break;
+            case 2:
+                //PlayGamePlayer
+            case 3:
+                return;
+            default:
+                System.out.println("please give a valid choice");
         }
     }
 }

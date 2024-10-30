@@ -11,9 +11,9 @@ public class Main {
     public static void main(String[] args) {
         
         Gson gson = new Gson();
-        LinkedList<Integer> list = new LinkedList<>();
-        list.
-        try (FileReader reader = new FileReader("src/main/java/org/example/data.json")) {
+        Menu menu = new Menu();
+        
+        try (FileReader reader = new FileReader("src/main/java/org/example/Json/combos.json")) {
             Person person = gson.fromJson(reader, Person.class);
             System.out.println("Name: " + person.getName());
             System.out.println("Age: " + person.getAge());
@@ -21,6 +21,7 @@ public class Main {
         } catch (JsonSyntaxException | JsonIOException | IOException e) {
             e.printStackTrace();
         }
+        menu.ShowMenu();
 
         
     }
