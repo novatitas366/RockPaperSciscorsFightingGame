@@ -3,10 +3,8 @@ package org.example;
 import java.util.Scanner;
 
 public class Menu {
-    
-    
     public void ShowMenu() {
-            
+
         while (true) {
 
             String RESET = "\u001B[0m";
@@ -53,45 +51,53 @@ public class Menu {
             }
         }
     }
-    public static void clearscrn(){
+
+    public static void clearscrn() {
         System.out.println("\033[H\033[2J");
         System.out.flush();
     }
+
     private static AI comp = new AI();
-    
-    public static void ShowSettings(){
-        
-        clearscrn();
-        Scanner sc = new Scanner(System.in);
-        System.out.println(" _______  _______  _______  _______  ___   __    _  _______  _______ \n" +
-                "|       ||       ||       ||       ||   | |  |  | ||       ||       |\n" +
-                "|  _____||    ___||_     _||_     _||   | |   |_| ||    ___||  _____|\n" +
-                "| |_____ |   |___   |   |    |   |  |   | |       ||   | __ | |_____ \n" +
-                "|_____  ||    ___|  |   |    |   |  |   | |  _    ||   ||  ||_____  |\n" +
-                " _____| ||   |___   |   |    |   |  |   | | | |   ||   |_| | _____| |\n" +
-                "|_______||_______|  |___|    |___|  |___| |_|  |__||_______||_______|");
 
-        System.out.println("1. change AI strength. Current - " + comp.getAiDifficulty());
-        System.out.println("4.go back");
-        System.out.println("select a choice:");
-        int choice = sc.nextInt();
-        switch (choice) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                return;
+    public static void ShowSettings() {
+        while (true) {
+            clearscrn();
+            Scanner sc = new Scanner(System.in);
+            System.out.println(" _______  _______  _______  _______  ___   __    _  _______  _______ \n" +
+                    "|       ||       ||       ||       ||   | |  |  | ||       ||       |\n" +
+                    "|  _____||    ___||_     _||_     _||   | |   |_| ||    ___||  _____|\n" +
+                    "| |_____ |   |___   |   |    |   |  |   | |       ||   | __ | |_____ \n" +
+                    "|_____  ||    ___|  |   |    |   |  |   | |  _    ||   ||  ||_____  |\n" +
+                    " _____| ||   |___   |   |    |   |  |   | | | |   ||   |_| | _____| |\n" +
+                    "|_______||_______|  |___|    |___|  |___| |_|  |__||_______||_______|");
 
-            default:
-                System.out.println("Select a valid option!");
-                break;
+            System.out.println("1. change AI strength. Current - " + comp.getAiDifficulty());
+            System.out.println("4.go back");
+            System.out.println("select a choice:");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("choose difficulty:\n1-easy\n2-medium(AI chooses based on probability)\n3-hard");
+                    comp.changeAiDifficulty(sc.nextInt());
+                    
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    return;
+
+                default:
+                    System.out.println("Select a valid option!");
+                    break;
+            }
         }
     }
-    public static void showPlayerMenu(){
-        int choice = 0;
+
+    public static void showPlayerMenu() {
+
         Scanner sc = new Scanner(System.in);
         System.out.println("how many players are going to play:");
         System.out.println("1. One player (play with AI)");
@@ -100,10 +106,10 @@ public class Menu {
         System.out.print("give choice: ");
         switch (sc.nextInt()) {
             case 1:
-                //PlayGameAI
+                // PlayGameAI
                 break;
             case 2:
-                //PlayGamePlayer
+                // PlayGamePlayer
             case 3:
                 return;
             default:
