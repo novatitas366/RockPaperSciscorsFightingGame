@@ -8,48 +8,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 public class Game {
-
-
-    static class TriSet<A, B, C> {
-        private A first;
-        private B second;
-        private C third;
-    
-        public TriSet(A first, B second, C third) {
-            this.first = first;
-            this.second = second;
-            this.third = third;
-        }
-    
-        public A getFirst() {
-            return first;
-        }
-    
-        public B getSecond() {
-            return second;
-        }
-    
-        public C getThird() {
-            return third;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-    public static void createComboHashMap(LinkedList<Combo.combo> Combos, TriSet<String, String, String> triset){
-        Map<TriSet<String, String, String>, Boolean> hashOfCombos = new HashMap<>();
-        for(Combo.combo tempcombo: Combos){
-            triset = new TriSet<String, String, String>(tempcombo.getAttack1(), tempcombo.getAttack2(), tempcombo.getAttack3());
-            hashOfCombos.put(triset, true);
-        }
-    }
     public static void gameWithAI(AI ai, String PlayerName) {
         Player player = new Player(PlayerName, 100, false);
         if (ai.getAiDifficulty() == "easy") {
@@ -66,7 +24,7 @@ public class Game {
         Player player2 = new Player(PlayerName2, 100, false);
         boolean exitGame = false;
 
-        createComboHashMap(Combos);
+        
         
 
         while (player1.gethealth() > 0 && player2.gethealth() > 0 || !exitGame) {
@@ -107,8 +65,8 @@ public class Game {
 
             player2.chooseAttack(checkChoice);
 
-            player1.damageHealth(player2.getChoice());
-            player2.damageHealth(player1.getChoice());
+            player1.damageHealth(player2.dealDamage(player1.getChoice(), Combos));
+            player2.damageHealth(player1.dealDamage(player2.getChoice(), Combos));
         }
 
     }

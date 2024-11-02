@@ -13,11 +13,13 @@ public class Player {
     private String name;
     private int health;
     private String choice;
-    private static Queue <String> currentCombo = new LinkedList<>();
+    private Queue <String> currentCombo = new LinkedList<>();
     Map <String, Integer> damageValues = new HashMap<>();
     
 
-
+    public Queue<String> getCurrentCombo() {
+        return currentCombo;
+    }
     public Player(String name, int health, boolean AI){
         if(AI){
             this.name = "AI";
@@ -67,25 +69,84 @@ public class Player {
         
     }
 
-    public int damageHealth(String choice){
-        if(this.choice == "Fire" && choice == "Water"){
-            int damage = damageValues.get(choice);
-            this.health = this.health - damage;
+    public int checkIfCombo(LinkedList<Combo.combo> Combos){
+        boolean check = true;
+        int index = 0;
+        System.out.println(getCurrentCombo().size());
+        if(getCurrentCombo().size() != 3){
+            return -2;
+        }
+        Queue <String> tempCombo = new LinkedList<>(getCurrentCombo());
+        for(Combo.combo combo: Combos){
+            check = true;
+            String attack1 = combo.getAttack1();
+            String attack2 = combo.getAttack2();
+            String attack3 = combo.getAttack3();
+            int counter = 1;
+
+
+            //later change to poll then peek
+            for(String move: tempCombo){
+                if(counter == 1 && !move.equals(attack1)){
+                    check = false;
+                }
+                else if(counter == 2 && !move.equals(attack2)){
+                    check = false;
+                }
+                else if(counter == 3 && !move.equals(attack3)){
+                    check = false;
+                }
+                counter++;
+            }
+           if(check == true){
+                break;
+           }
+            index++;
+
+        }
+        if(check == false){
+            return -1;
+        }
+        else{
+            return index;
+        }
+    }
+    
+    //make them deal damage
+
+    public int dealDamage(String choice, LinkedList<Combo.combo> Combos){
+        int index = checkIfCombo(Combos);
+        if(index != -1 && index != -2 && this.choice == "Fire" && choice == "Earth"){
+            int damage = Combos.get(index).getComboDamage();
             return damage;
         }
-        else if(this.choice == "Water" && choice == "Earth"){
-            int damage = damageValues.get(choice);
-            this.health = this.health - damage;
+        else if(index != -1 && index != -2 && this.choice == "Water" && choice == "Fire"){
+            int damage = Combos.get(index).getComboDamage();
             return damage;
         }
-        else if(this.choice == "Earth" && choice == "Fire"){
+        else if(index != -1 && index != -2 && this.choice == "Earth" && choice == "Water"){
+            int damage = Combos.get(index).getComboDamage();
+            return damage;
+        }
+        else if(this.choice == "Fire" && choice == "Earth"){
             int damage = damageValues.get(choice);
-            this.health = this.health - damage;
+            return damage;
+        }
+        else if(this.choice == "Water" && choice == "Fire"){
+            int damage = damageValues.get(choice);
+            return damage;
+        }
+        else if(this.choice == "Earth" && choice == "Water"){
+            int damage = damageValues.get(choice);
             return damage;
         }
         else{
             return 0;
         }
+    };
 
-    }
+
+    public void damageHealth(int damage){
+        this.health -= damage;
+    }   
 }
