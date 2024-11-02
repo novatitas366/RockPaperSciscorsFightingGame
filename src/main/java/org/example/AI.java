@@ -6,7 +6,7 @@ public class AI {
     public String getAiDifficulty(){
         return aiDifficulty;
     }
-    public static void changeAiDifficulty(int diff){
+    public void changeAiDifficulty(int diff){
         switch(diff){
             case 1:
                 aiDifficulty = "easy";

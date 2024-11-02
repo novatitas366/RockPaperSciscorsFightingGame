@@ -1,5 +1,20 @@
-{
-    "name": "John Doe",
-    "age": 30,
-    "email": "john.doe@example.com"
-}
+[   
+    {
+        "attack1": "John Doe",
+        "attack2": "",
+        "attack3": "john.doe@example.com",
+        "comboattack": ""
+    },
+    {
+        "attack1": "John Doe",
+        "attack2": "",
+        "attack3": "john.doe@example.com",
+        "comboattack": ""
+    },
+    {
+        "attack1": "John Doe",
+        "attack2": "",
+        "attack3": "john.doe@example.com",
+        "comboattack": ""
+    }
+]

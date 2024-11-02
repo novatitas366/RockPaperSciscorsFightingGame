@@ -1,16 +1,18 @@
 package org.example;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
-
+import org.example.Game;
 public class Menu {
-    public void ShowMenu() {
-
+    static Scanner sc = new Scanner(System.in);
+    public void ShowMenu(LinkedList<Combo.combo> Combos) {
         while (true) {
 
             String RESET = "\u001B[0m";
             String RED = "\u001B[31m";
             String GREEN = "\u001B[32m";
-            Scanner sc = new Scanner(System.in);
+            
 
             System.out.println(RED +
                     " (                                (                     \r\n" +
@@ -33,8 +35,10 @@ public class Menu {
             System.out.println(" ".repeat(consoleWidth) + QuitGame);
             System.out.println();
             System.out.println("Select an option:");
+            System.out.println();
+            System.out.println(Combos.get(0).getAll());
             choice = sc.nextInt();
-
+           
             switch (choice) {
                 case 1:
                     showPlayerMenu();
@@ -62,7 +66,6 @@ public class Menu {
     public static void ShowSettings() {
         while (true) {
             clearscrn();
-            Scanner sc = new Scanner(System.in);
             System.out.println(" _______  _______  _______  _______  ___   __    _  _______  _______ \n" +
                     "|       ||       ||       ||       ||   | |  |  | ||       ||       |\n" +
                     "|  _____||    ___||_     _||_     _||   | |   |_| ||    ___||  _____|\n" +
@@ -80,13 +83,13 @@ public class Menu {
                 case 1:
                     System.out.println("choose difficulty:\n1-easy\n2-medium(AI chooses based on probability)\n3-hard");
                     comp.changeAiDifficulty(sc.nextInt());
-                    
                     break;
                 case 2:
                     break;
                 case 3:
                     break;
                 case 4:
+                
                     return;
 
                 default:
@@ -95,10 +98,9 @@ public class Menu {
             }
         }
     }
-
+    
     public static void showPlayerMenu() {
-
-        Scanner sc = new Scanner(System.in);
+        clearscrn();
         System.out.println("how many players are going to play:");
         System.out.println("1. One player (play with AI)");
         System.out.println("2. two players (play against each other)");
@@ -106,14 +108,16 @@ public class Menu {
         System.out.print("give choice: ");
         switch (sc.nextInt()) {
             case 1:
-                // PlayGameAI
+                Game.gameWithAI(comp);
                 break;
             case 2:
                 // PlayGamePlayer
             case 3:
+                
                 return;
             default:
                 System.out.println("please give a valid choice");
         }
+        
     }
 }
