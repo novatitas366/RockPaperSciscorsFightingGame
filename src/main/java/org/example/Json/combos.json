@@ -1,20 +1,37 @@
-[   
+[
     {
-        "attack1": "John Doe",
-        "attack2": "",
-        "attack3": "john.doe@example.com",
-        "comboattack": ""
+        "attack1": "Fire",
+        "attack2": "Earth",
+        "attack3": "Water",
+        "comboattack": "Volcanic Eruption",
+        "comboDamage": 30
     },
     {
-        "attack1": "John Doe",
-        "attack2": "",
-        "attack3": "john.doe@example.com",
-        "comboattack": ""
+        "attack1": "Fire",
+        "attack2": "Water",
+        "attack3": "Earth",
+        "comboattack": "Steam Blast",
+        "comboDamage": 25
     },
     {
-        "attack1": "John Doe",
-        "attack2": "",
-        "attack3": "john.doe@example.com",
-        "comboattack": ""
+        "attack1": "Water",
+        "attack2": "Earth",
+        "attack3": "Fire",
+        "comboattack": "Mudslide",
+        "comboDamage": 40
+    },
+    {
+      "attack1": "Earth",
+      "attack2": "Water",
+      "attack3": "Water",
+      "comboattack": "Mudslide Barrage",
+      "comboDamage": 20
+    },
+    {
+      "attack1": "Fire",
+      "attack2": "Earth",
+      "attack3": "Earth",
+      "comboattack": "Flame Quake",
+      "comboDamage": 35
     }
-]
+  ]

@@ -23,12 +23,11 @@ public class Main {
             Type personListType = new TypeToken<List<combo>>() {
             }.getType();
 
-            List<combo> tempPeople = gson.fromJson(reader, personListType);
-            Combos = new LinkedList<>(tempPeople);
+            List<combo> tempCombos = gson.fromJson(reader, personListType);
+            Combos = new LinkedList<>(tempCombos);
         } catch (JsonSyntaxException | JsonIOException | IOException e) {
             e.printStackTrace();
         }
-        
         menu.ShowMenu(Combos);
 
     }

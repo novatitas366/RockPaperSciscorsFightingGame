@@ -1,7 +1,11 @@
 package org.example;
 
-public class AI {
+public class AI extends Player {
     private static String aiDifficulty = "easy";
+
+    public AI(int health, boolean AI){
+        super("AI", health, AI);
+    }
 
     public String getAiDifficulty(){
         return aiDifficulty;
@@ -22,4 +26,8 @@ public class AI {
             
         }
     }
+
+    
+
+
 }

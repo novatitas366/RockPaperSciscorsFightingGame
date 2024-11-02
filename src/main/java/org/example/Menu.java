@@ -8,7 +8,7 @@ public class Menu {
     static Scanner sc = new Scanner(System.in);
     public void ShowMenu(LinkedList<Combo.combo> Combos) {
         while (true) {
-
+            
             String RESET = "\u001B[0m";
             String RED = "\u001B[31m";
             String GREEN = "\u001B[32m";
@@ -36,12 +36,11 @@ public class Menu {
             System.out.println();
             System.out.println("Select an option:");
             System.out.println();
-            System.out.println(Combos.get(0).getAll());
             choice = sc.nextInt();
            
             switch (choice) {
                 case 1:
-                    showPlayerMenu();
+                    showPlayerMenu(Combos);
                     break;
                 case 2:
                     ShowSettings();
@@ -61,7 +60,7 @@ public class Menu {
         System.out.flush();
     }
 
-    private static AI comp = new AI();
+    private static AI comp = new AI(100, true);
 
     public static void ShowSettings() {
         while (true) {
@@ -99,7 +98,7 @@ public class Menu {
         }
     }
     
-    public static void showPlayerMenu() {
+    public static void showPlayerMenu(LinkedList<Combo.combo> Combos) {
         clearscrn();
         System.out.println("how many players are going to play:");
         System.out.println("1. One player (play with AI)");
@@ -108,10 +107,10 @@ public class Menu {
         System.out.print("give choice: ");
         switch (sc.nextInt()) {
             case 1:
-                Game.gameWithAI(comp);
+                showPlayerCreationMenu(1, Combos);
                 break;
             case 2:
-                // PlayGamePlayer
+                showPlayerCreationMenu(2, Combos);
             case 3:
                 
                 return;
@@ -119,5 +118,31 @@ public class Menu {
                 System.out.println("please give a valid choice");
         }
         
+    }
+
+    public static void showPlayerCreationMenu(int choice, LinkedList<Combo.combo> Combos){
+        clearscrn();
+        if(choice == 1){
+            String PlayerName;
+            System.out.println("what is the player name?");
+            sc.nextLine();
+            System.out.print("name: "); PlayerName = sc.nextLine();
+            System.out.println(PlayerName);
+
+
+            Game.gameWithAI(comp, PlayerName);
+        }
+        else if(choice == 2){
+            String PlayerName1, PlayerName2;
+            System.out.println("what is the name of player1?");
+            sc.nextLine();
+            System.out.print("name: "); PlayerName1 = sc.nextLine();
+            clearscrn();
+            System.out.println("what is the name of player2?");
+            System.out.print("name: "); PlayerName2 = sc.nextLine();
+            Game.gameWithPlayer(PlayerName1, PlayerName2, sc, Combos);
+        }
+        
+
     }
 }
