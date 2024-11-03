@@ -50,12 +50,30 @@ public class Player {
         return name;
     }
     public String chooseAttack(int choice) {
-        
-            if (choice == 1) {
+            if(currentCombo.size() == 3 && choice == 1){
+                currentCombo.poll();
                 currentCombo.add("Fire");
                 this.choice = "Fire";
                 return "Fire";
-            } else if (choice == 2) {
+            }
+            else if(currentCombo.size() == 3 && choice == 2){
+                currentCombo.poll();
+                currentCombo.add("Water");
+                this.choice = "Water";
+                return "Water";
+            }
+            else if(currentCombo.size() == 3 && choice == 3){
+                currentCombo.poll();
+                currentCombo.add("Earth");
+                this.choice = "Earth";
+                return "Earth";
+            }
+            else if (choice == 1) {
+                currentCombo.add("Fire");
+                this.choice = "Fire";
+                return "Fire";
+            } 
+            else if (choice == 2) {
                 currentCombo.add("Water");
                 this.choice = "Water";
                 return "Water";

@@ -45,6 +45,7 @@ public class Game {
             }
 
             player1.chooseAttack(checkChoice);
+            System.out.println(player1.getCurrentCombo().size());    
             Menu.clearscrn();
             System.out
                     .println(player1.getName() + " health: " + player1.gethealth() + " ".repeat(10) + player2.getName()
