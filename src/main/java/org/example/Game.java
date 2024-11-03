@@ -1,13 +1,26 @@
 package org.example;
 
-import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
+
 public class Game {
+
+    static class gameHistory{
+        Player player1;
+        Player player2;
+
+        public gameHistory(Player player1, Player player2){
+            this.player1 = player1;
+            this.player2 = player2;
+        }
+        public gameHistory(){
+            this.player1 = null;
+            this.player2 = null;
+        }
+    }
+
+
     public static void gameWithAI(AI ai, String PlayerName) {
         Player player = new Player(PlayerName, 100, false);
         if (ai.getAiDifficulty() == "easy") {
@@ -18,17 +31,18 @@ public class Game {
     }
 
     public static void gameWithPlayer(String PlayerName1, String PlayerName2, Scanner sc, LinkedList<Combo.combo> Combos) {
-        boolean bothChoiceGiven = false;
+        
         int checkChoice;
         Player player1 = new Player(PlayerName1, 100, false);
         Player player2 = new Player(PlayerName2, 100, false);
         boolean exitGame = false;
-
+        Stack<gameHistory> History= new Stack<>();
         
         
 
         while (player1.gethealth() > 0 && player2.gethealth() > 0 || !exitGame) {
             Menu.clearscrn();
+            History.push(new gameHistory(player1, player2));
             System.out.println(player1.getName() + " health: " + player1.gethealth() + " ".repeat(10) + player2.getName()
                                                  + " health: " + player2.gethealth());
 

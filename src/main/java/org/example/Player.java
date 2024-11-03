@@ -1,13 +1,9 @@
 package org.example;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Queue;
-import java.util.Scanner;
-
-import javax.management.Query;
 
 public class Player {
     private String name;
@@ -94,27 +90,25 @@ public class Player {
         if(getCurrentCombo().size() != 3){
             return -2;
         }
-        Queue <String> tempCombo = new LinkedList<>(getCurrentCombo());
+        //Queue <String> tempCombo = new LinkedList<>(getCurrentCombo());
         for(Combo.combo combo: Combos){
+            Queue <String> tempCombo = new LinkedList<>(getCurrentCombo());
             check = true;
             String attack1 = combo.getAttack1();
             String attack2 = combo.getAttack2();
             String attack3 = combo.getAttack3();
-            int counter = 1;
 
-
-            //later change to poll then peek
-            for(String move: tempCombo){
-                if(counter == 1 && !move.equals(attack1)){
+            for(int i = 1; i<=3; i++ ){
+                if(i == 1 && !tempCombo.peek().equals(attack1)){
                     check = false;
                 }
-                else if(counter == 2 && !move.equals(attack2)){
+                else if(i == 2 && !tempCombo.peek().equals(attack2)){
                     check = false;
                 }
-                else if(counter == 3 && !move.equals(attack3)){
+                else if(i == 3 && !tempCombo.peek().equals(attack3)){
                     check = false;
                 }
-                counter++;
+                tempCombo.poll();
             }
            if(check == true){
                 break;
