@@ -7,12 +7,26 @@ import java.util.LinkedList;
 public class Game {
 
     static class gameHistory{
-        Player player1;
-        Player player2;
+        private Player player1;
+        private Player player2;
+        private AI ai;
 
+        public Player getPlayer1() {
+            return player1;
+        }
+        public Player getPlayer2() {
+            return player2;
+        }
+        public AI getAi() {
+            return ai;
+        }
         public gameHistory(Player player1, Player player2){
-            this.player1 = player1;
-            this.player2 = player2;
+            this.player1 = new Player(player1);
+            this.player2 = new Player(player2);
+        }
+        public gameHistory(Player player1, AI ai){
+            this.player1 = new Player(player1);
+            this.ai = new AI(ai);
         }
         public gameHistory(){
             this.player1 = null;
@@ -48,36 +62,52 @@ public class Game {
 
             System.out.println(player1.getName() + " Choice: " + player1.getChoice() + " ".repeat(10) + player2.getName()
                             + " choice: " + player2.getChoice());
-            System.out.print(player1.getName() + "choose Attack: \n1.Fire\n2.Water\n3.Earth\nchoose(type the number):");
+                            System.out.print(player1.getName() + "choose Attack: \n1.Fire\n2.Water\n3.Earth\n4.Go back in Time\n5.Forfeit\nchoose(type the number):");
 
             checkChoice = sc.nextInt();
 
-            while (checkChoice < 1 || checkChoice > 3) {
+            while (checkChoice < 1 || checkChoice > 5) {
                 System.out.print("bad choice choose again: ");
                 sc.nextLine();
                 checkChoice = sc.nextInt();
             }
-
+            if(checkChoice == 4){
+                int howFar = Menu.showHistoryMenu(History);
+                if(howFar != -1){
+                    for(int i = 0; i< howFar-1; i++){
+                        History.pop();
+                    }
+                    player1 = History.peek().getPlayer1();
+                    player2 = History.peek().getPlayer2();
+                }
+                continue;
+            }
             player1.chooseAttack(checkChoice);
             System.out.println(player1.getCurrentCombo().size());    
             Menu.clearscrn();
-            System.out
-                    .println(player1.getName() + " health: " + player1.gethealth() + " ".repeat(10) + player2.getName()
+            System.out.println(player1.getName() + " health: " + player1.gethealth() + " ".repeat(10) + player2.getName()
                             + " health: " + player2.gethealth());
-            System.out.println(
-                    player1.getName() + " Choice: " + "***" + " ".repeat(10) + player2.getName() + " choice: " + "***");
-            System.out.print(player2.getName() + "choose Attack: \n1.Fire\n2.Water\n3.Earth\nchoose(type the number):");
+            System.out.println(player1.getName() + " Choice: " + "***" + " ".repeat(10) + player2.getName() + " choice: " + "***");
+            System.out.print(player2.getName() + "choose Attack: \n1.Fire\n2.Water\n3.Earth\n4.Go back in Time\n5.Forfeit\nchoose(type the number):");
 
             sc.nextLine();
             checkChoice = sc.nextInt();
-            if (checkChoice < 1 || checkChoice > 3) {
+            if (checkChoice < 1 || checkChoice > 5) {
                 while (true) {
                     System.out.print("bad choice choose again: ");
                     sc.nextLine();
                     checkChoice = sc.nextInt();
                 }
             }
-
+            if(checkChoice == 4){
+                int howFar = Menu.showHistoryMenu(History);
+                for(int i = 0; i< howFar-1; i++){
+                    History.pop();
+                }
+                player1 = History.peek().getPlayer1();
+                player2 = History.peek().getPlayer2();
+                continue;
+            }
             player2.chooseAttack(checkChoice);
 
             player1.damageHealth(player2.dealDamage(player1.getChoice(), Combos));

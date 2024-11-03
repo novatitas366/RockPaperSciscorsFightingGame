@@ -1,9 +1,8 @@
 package org.example;
-
+import java.util.Stack;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
-import org.example.Game;
+import org.example.Game.gameHistory;
 public class Menu {
     static Scanner sc = new Scanner(System.in);
     public void ShowMenu(LinkedList<Combo.combo> Combos) {
@@ -84,8 +83,10 @@ public class Menu {
                     comp.changeAiDifficulty(sc.nextInt());
                     break;
                 case 2:
+                    System.out.println("animations: ");
                     break;
                 case 3:
+
                     break;
                 case 4:
                 
@@ -144,5 +145,38 @@ public class Menu {
         }
         
 
+    }
+
+    public static int showHistoryMenu(Stack<gameHistory> History){
+        while(true){
+            System.out.println("How far do you want to jump back?");
+            Stack<gameHistory> tempHist = new Stack<>();
+            for(gameHistory thing: History){
+                tempHist.push(thing);
+            }
+            int i = 1;
+            while(!tempHist.isEmpty()&& i<=3){
+                System.out.println(i+". "+tempHist.peek().getPlayer1().getName()+"  Health: "+tempHist.peek().getPlayer1().gethealth()+"  move: "+tempHist.peek().getPlayer1().getChoice()+" ".repeat(5)+ tempHist.peek().getPlayer2().getName()+"  Health: "+tempHist.peek().getPlayer2().gethealth()+"   move: "+tempHist.peek().getPlayer2().getChoice());
+                tempHist.pop();
+                i++;
+            }
+
+            System.out.println(i+". go back");
+
+            sc.nextLine();
+            int choice = sc.nextInt();
+            while(choice < 1 && choice >i){
+                System.out.print("bad choice choose again: ");
+                sc.nextLine();
+                choice = sc.nextInt();
+            }
+            if(choice == i){
+                return -1;
+            }
+            else{
+                return choice;
+            }
+            
+        }
     }
 }

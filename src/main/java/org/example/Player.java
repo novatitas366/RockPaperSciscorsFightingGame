@@ -31,6 +31,14 @@ public class Player {
         damageValues.put("Water", 10);
         damageValues.put("Earth", 10);
     }
+
+    public Player(Player other){
+        this.health = other.health;
+        this.name = other.name;
+        this.choice = other.choice;
+        this.damageValues = other.damageValues;
+        this.currentCombo = other.currentCombo;
+    }
     public int gethealth(){
         return health;
     }
