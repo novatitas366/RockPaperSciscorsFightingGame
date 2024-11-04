@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.Scanner;
 import java.util.Stack;
+
+import org.example.Combo.combo;
+
 import java.util.LinkedList;
 
 public class Game {
@@ -55,6 +58,7 @@ public class Game {
         
 
         while (player1.gethealth() > 0 && player2.gethealth() > 0 || !exitGame) {
+            try{
             Menu.clearscrn();
             History.push(new gameHistory(player1, player2));
             System.out.println(player1.getName() + " health: " + player1.gethealth() + " ".repeat(10) + player2.getName()
@@ -110,8 +114,34 @@ public class Game {
             }
             player2.chooseAttack(checkChoice);
 
-            player1.damageHealth(player2.dealDamage(player1.getChoice(), Combos));
-            player2.damageHealth(player1.dealDamage(player2.getChoice(), Combos));
+
+            String message2;
+            String message1;
+
+
+            message2 = player1.damageHealth(player2.dealDamage(player1.getChoice(), Combos));
+            message1 = player2.damageHealth(player1.dealDamage(player2.getChoice(), Combos));
+            
+            if(message1.equals("Basic")){
+                System.out.println(player1.getName()+" used "+player1.getChoice()+" and won against "+player2.getName()+" who chose "+ player2.getChoice());
+            }
+            else if(message1.equals("Combo")){
+                System.out.println(player1.getName()+" used "+player1.getChoice()+" and won against "+player2.getName()+" who chose "+ player2.getChoice());
+                System.out.println(player1.getName()+" also used the Combo"+ Combos.get(player1.checkIfCombo(Combos)).getComboattack());
+            }
+            if(message2.equals("Basic")){
+                System.out.println(player2.getName()+" used "+player2.getChoice()+" and won against "+player1.getName()+" who chose "+ player1.getChoice());
+            }
+            else if(message2.equals("Combo")){
+                System.out.println(player2.getName()+" used "+player2.getChoice()+" and won against "+player1.getName()+" who chose "+ player1.getChoice());
+                System.out.println(player2.getName()+" also used the Combo"+ Combos.get(player2.checkIfCombo(Combos)).getComboattack());
+            }
+            Thread.sleep(2000);
+        }
+        
+        catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         }
 
     }

@@ -12,6 +12,55 @@ import java.util.*;
 
 import org.example.Combo.combo;
 
+/*
+ * Sukurkite žaidimą, kuriame žaidėjo personažas kovoja „akmuo-popierius-žirklės“ principu prieš kompiuterio personažą arba kitą žaidėją. Žaidimas yra paįvairinamas tuo, kad jeigu žaidėjo arba kompiuterio panaudotos trys atakos atitinka kurią nors programoje išsaugotą kombinaciją, tai yra atliekama papildoma ataka. Kombinacijas galima suprasti kaip muštynių žaidimuose (pvz.: „Mortal Kombat“, „Street Fighter“) naudojamas combo atakas.
+
+Užduoties kokybė priklauso ir nuo studento fantazijos besišypsantis
+
+Programoje turi būti realizuota eilės, steko ir vienakrypčio tiesinio sąrašo duomenų struktūros (būtina naudoti bibliotekas).
+
+Programos vartotojas gali (2 balai):
+
+    Žaisti:
+        pasirinkti, kiek bus žaidėjų, (0,2 balo)
+        pasirinkti norimą ataką, (0,3 balo)
+        nutraukti žaidimą (grįžtama į meniu), (0,2 balo)
+    Nustatymai:
+        pakeisti nustatymus, bent 3 parinktys, (0,6 balo)
+    Peržiūrėti kovų istoriją (kas su kuo žaidė ir kas laimėjo – istorija saugoma vienakrypčiame tiesiniame sąraše), (0,5 balo)
+    išeiti iš žaidimo. (0,2 balo)
+
+Nematomos operacijos ir funkcionalumai (5,5 balai):
+
+    galimos atakų kombinacijos laikomos dokumente (.json formatas), (0,5 balo) - TAIP
+    realizuotos trijų tipų atakos ir jų veiksmingumas (akmuo nugali žirkles, žirklės nugali popierių ir pan.), (0,5 balo) - TAIP
+    combo atakų atlikimas, skirtingų galimų kombinacijų turi būti bent 3; žaidėjo pasirinktoms atakoms kaupti naudojama eilės duomenų struktūra; jeigu surenkama combo ataka, atliekama papildoma ataka (padaroma papildomai žalos); jeigu žaidėjas gavo žalą combo rinkimo metu – combo atakos rinkimas nutrūksta, (1 balas) - dar NE.
+    kartą per kovą žaidėjas gali atlikti UNDO veiksmą – gįžti į kovos stadiją vienu, dviem arba trimis žingsniais atgal; tam kovos eiga yra kaupiama steke, (1 balas)
+    kovų istorija yra saugoma atskirame .json dokumente, (0,5 balo)
+    galimybė lošti vienam arba dviese, (1 balas)
+    atsitiktiniu būdu parenka kompiuterio žaidėjo ataką (papildomi balai, jeigu sugalvosite, kad kompiuteris parinktų atakas pagal žaidėjo atakų istoriją – simple AI), (0,5 balo)
+    žaidėjo ir kompiuterio žaidėjo gyvybių taškai ir jų mažėjimas, (0,3 balo)
+    žaidimo pabaiga, skelbiamas nugalėtojas. (0,2 balo)
+
+UI (1 balas):
+
+    žaidimo metu visada matomos valdymas ir žaidėjų gyvybės, (0,5 balo)
+    galima aiškiai suprasti, kas vyksta: kokios parinktos buvo kiekvieno žaidėjo atakos, ar įvyko combo ataka, kokios atakos buvo pasirinktos žaidėjų, kuri ataka laimėjo ir kiek žalos padarė. (0,5 balo)
+
+Duomenų struktūrų elementai (1,5 balo):
+
+    žaidėjų ir kompiuterio atakų pasirinkimai,
+    žaidimo eigos informacija,
+    kovų istorija: kas su kuo žaidė ir kas laimėjo.
+
+Dokumentai: galimos kombinacijos ir kovų istorija yra saugoma json dokumentuose.
+Galimi papildomi balai už unikalius sprendimus, stilistiką, DI.
+ * 
+ * 
+ */
+
+
+
 public class Main {
     public static void main(String[] args) {
         

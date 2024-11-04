@@ -10,7 +10,7 @@ public class Player {
     private int health;
     private String choice;
     private Queue <String> currentCombo = new LinkedList<>();
-    Map <String, Integer> damageValues = new HashMap<>();
+    private Map <String, Integer> damageValues = new HashMap<>();
     
 
     public Queue<String> getCurrentCombo() {
@@ -98,7 +98,6 @@ public class Player {
         if(getCurrentCombo().size() != 3){
             return -2;
         }
-        //Queue <String> tempCombo = new LinkedList<>(getCurrentCombo());
         for(Combo.combo combo: Combos){
             Queue <String> tempCombo = new LinkedList<>(getCurrentCombo());
             check = true;
@@ -166,7 +165,22 @@ public class Player {
     };
 
 
-    public void damageHealth(int damage){
-        this.health -= damage;
+    public String damageHealth(int damage){
+        if(damage == damageValues.get("Fire")){
+            this.health -= damage;
+            return "Basic";
+        }
+        else if(damage == 0){
+            this.health -= damage;
+            return "Zero";
+        }
+        else if(damage != damageValues.get("Fire")){
+            this.health -= damage;
+            return "Combo";
+        }
+        else {
+            return "praso";
+        }
+        
     }   
 }
