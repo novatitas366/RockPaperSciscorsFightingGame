@@ -27,15 +27,15 @@ Programos vartotojas gali (2 balai):
         nutraukti žaidimą (grįžtama į meniu), (0,2 balo) - Ne
     Nustatymai:
         pakeisti nustatymus, bent 3 parinktys, (0,6 balo) - 1 pariktis kolkas
-    Peržiūrėti kovų istoriją (kas su kuo žaidė ir kas laimėjo – istorija saugoma vienakrypčiame tiesiniame sąraše), (0,5 balo)
+    Peržiūrėti kovų istoriją (kas su kuo žaidė ir kas laimėjo – istorija saugoma vienakrypčiame tiesiniame sąraše), (0,5 balo) -NE
     išeiti iš žaidimo. (0,2 balo) - Taip
 
 Nematomos operacijos ir funkcionalumai (5,5 balai):
 
     galimos atakų kombinacijos laikomos dokumente (.json formatas), (0,5 balo) - TAIP
     realizuotos trijų tipų atakos ir jų veiksmingumas (akmuo nugali žirkles, žirklės nugali popierių ir pan.), (0,5 balo) - TAIP
-    combo atakų atlikimas, skirtingų galimų kombinacijų turi būti bent 3; žaidėjo pasirinktoms atakoms kaupti naudojama eilės duomenų struktūra; jeigu surenkama combo ataka, atliekama papildoma ataka (padaroma papildomai žalos); jeigu žaidėjas gavo žalą combo rinkimo metu – combo atakos rinkimas nutrūksta, (1 balas) - dar NE.
-    kartą per kovą žaidėjas gali atlikti UNDO veiksmą – gįžti į kovos stadiją vienu, dviem arba trimis žingsniais atgal; tam kovos eiga yra kaupiama steke, (1 balas)
+    combo atakų atlikimas, skirtingų galimų kombinacijų turi būti bent 3; žaidėjo pasirinktoms atakoms kaupti naudojama eilės duomenų struktūra; jeigu surenkama combo ataka, atliekama papildoma ataka (padaroma papildomai žalos); jeigu žaidėjas gavo žalą combo rinkimo metu – combo atakos rinkimas nutrūksta, (1 balas) - Taip (reikia testuot.)
+    kartą per kovą žaidėjas gali atlikti UNDO veiksmą – gįžti į kovos stadiją vienu, dviem arba trimis žingsniais atgal; tam kovos eiga yra kaupiama steke, (1 balas) - Taip
     kovų istorija yra saugoma atskirame .json dokumente, (0,5 balo)
     galimybė lošti vienam arba dviese, (1 balas) - NE
     atsitiktiniu būdu parenka kompiuterio žaidėjo ataką (papildomi balai, jeigu sugalvosite, kad kompiuteris parinktų atakas pagal žaidėjo atakų istoriją – simple AI), (0,5 balo)
@@ -66,15 +66,40 @@ public class Main {
         
         Gson gson = new Gson();
         Menu menu = new Menu();
+        LinkedList<History> history= null; 
         LinkedList<combo> Combos = null;
         try (FileReader reader = new FileReader("src/main/java/org/example/Json/combos.json")) {
 
-            Type personListType = new TypeToken<List<combo>>() {
+            Type comboListType = new TypeToken<List<combo>>() {
             }.getType();
 
-            List<combo> tempCombos = gson.fromJson(reader, personListType);
+            List<combo> tempCombos = gson.fromJson(reader, comboListType);
             Combos = new LinkedList<>(tempCombos);
         } catch (JsonSyntaxException | JsonIOException | IOException e) {
+            e.printStackTrace();
+        }
+        try (FileReader reader = new FileReader("src/main/java/org/example/Json/combos.json")) {
+
+            Type comboListType = new TypeToken<List<combo>>() {
+            }.getType();
+
+            List<combo> tempCombos = gson.fromJson(reader, comboListType);
+            Combos = new LinkedList<>(tempCombos);
+        } catch (JsonSyntaxException | JsonIOException | IOException e) {
+            e.printStackTrace();
+        }
+
+        try(FileReader reader = new FileReader("src/main/java/org/example/Json/history.json")){
+           Type historyListType = new TypeToken<List<combo>>() {
+            }.getType();
+            List<History> temphistories = gson.fromJson(reader, historyListType);
+            if(temphistories == null){
+                history = new LinkedList<>();  
+            }
+            else{
+                history = new LinkedList<>(temphistories);
+            }  
+        }catch(JsonSyntaxException | JsonIOException | IOException e){
             e.printStackTrace();
         }
         menu.ShowMenu(Combos);

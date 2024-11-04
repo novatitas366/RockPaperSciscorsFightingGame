@@ -50,7 +50,7 @@ public class Game {
     }
 
     public static void gameWithPlayer(String PlayerName1, String PlayerName2, Scanner sc,
-            LinkedList<Combo.combo> Combos) {
+        LinkedList<Combo.combo> Combos) {
         int checkChoice;
         Player player1 = new Player(PlayerName1, 100, false);
         Player player2 = new Player(PlayerName2, 100, false);
