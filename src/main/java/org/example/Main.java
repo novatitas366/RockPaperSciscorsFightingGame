@@ -22,13 +22,13 @@ Programoje turi būti realizuota eilės, steko ir vienakrypčio tiesinio sąraš
 Programos vartotojas gali (2 balai):
 
     Žaisti:
-        pasirinkti, kiek bus žaidėjų, (0,2 balo)
-        pasirinkti norimą ataką, (0,3 balo)
-        nutraukti žaidimą (grįžtama į meniu), (0,2 balo)
+        pasirinkti, kiek bus žaidėjų, (0,2 balo) - Taip
+        pasirinkti norimą ataką, (0,3 balo) - Taip
+        nutraukti žaidimą (grįžtama į meniu), (0,2 balo) - Ne
     Nustatymai:
-        pakeisti nustatymus, bent 3 parinktys, (0,6 balo)
+        pakeisti nustatymus, bent 3 parinktys, (0,6 balo) - 1 pariktis kolkas
     Peržiūrėti kovų istoriją (kas su kuo žaidė ir kas laimėjo – istorija saugoma vienakrypčiame tiesiniame sąraše), (0,5 balo)
-    išeiti iš žaidimo. (0,2 balo)
+    išeiti iš žaidimo. (0,2 balo) - Taip
 
 Nematomos operacijos ir funkcionalumai (5,5 balai):
 
@@ -37,15 +37,15 @@ Nematomos operacijos ir funkcionalumai (5,5 balai):
     combo atakų atlikimas, skirtingų galimų kombinacijų turi būti bent 3; žaidėjo pasirinktoms atakoms kaupti naudojama eilės duomenų struktūra; jeigu surenkama combo ataka, atliekama papildoma ataka (padaroma papildomai žalos); jeigu žaidėjas gavo žalą combo rinkimo metu – combo atakos rinkimas nutrūksta, (1 balas) - dar NE.
     kartą per kovą žaidėjas gali atlikti UNDO veiksmą – gįžti į kovos stadiją vienu, dviem arba trimis žingsniais atgal; tam kovos eiga yra kaupiama steke, (1 balas)
     kovų istorija yra saugoma atskirame .json dokumente, (0,5 balo)
-    galimybė lošti vienam arba dviese, (1 balas)
+    galimybė lošti vienam arba dviese, (1 balas) - NE
     atsitiktiniu būdu parenka kompiuterio žaidėjo ataką (papildomi balai, jeigu sugalvosite, kad kompiuteris parinktų atakas pagal žaidėjo atakų istoriją – simple AI), (0,5 balo)
-    žaidėjo ir kompiuterio žaidėjo gyvybių taškai ir jų mažėjimas, (0,3 balo)
-    žaidimo pabaiga, skelbiamas nugalėtojas. (0,2 balo)
+    žaidėjo ir kompiuterio žaidėjo gyvybių taškai ir jų mažėjimas, (0,3 balo) - TAIP
+    žaidimo pabaiga, skelbiamas nugalėtojas. (0,2 balo) - TAIP
 
 UI (1 balas):
 
-    žaidimo metu visada matomos valdymas ir žaidėjų gyvybės, (0,5 balo)
-    galima aiškiai suprasti, kas vyksta: kokios parinktos buvo kiekvieno žaidėjo atakos, ar įvyko combo ataka, kokios atakos buvo pasirinktos žaidėjų, kuri ataka laimėjo ir kiek žalos padarė. (0,5 balo)
+    žaidimo metu visada matomos valdymas ir žaidėjų gyvybės, (0,5 balo) - Taip
+    galima aiškiai suprasti, kas vyksta: kokios parinktos buvo kiekvieno žaidėjo atakos, ar įvyko combo ataka, kokios atakos buvo pasirinktos žaidėjų, kuri ataka laimėjo ir kiek žalos padarė. (0,5 balo) - TAIP
 
 Duomenų struktūrų elementai (1,5 balo):
 

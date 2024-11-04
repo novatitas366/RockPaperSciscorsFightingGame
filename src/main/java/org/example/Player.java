@@ -168,19 +168,26 @@ public class Player {
     public String damageHealth(int damage){
         if(damage == damageValues.get("Fire")){
             this.health -= damage;
+            currentCombo.clear();
             return "Basic";
         }
         else if(damage == 0){
             this.health -= damage;
             return "Zero";
         }
-        else if(damage != damageValues.get("Fire")){
-            this.health -= damage;
+        else{
+            this.health -= damageValues.get("Fire") + damage;
+            currentCombo.clear();
             return "Combo";
         }
-        else {
-            return "praso";
-        }
         
-    }   
+    }
+    
+    public boolean IsDead(){
+        if(gethealth() <= 0){
+            return true;
+        }
+        else return false;
+    }
+
 }
