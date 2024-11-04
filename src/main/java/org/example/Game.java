@@ -54,6 +54,8 @@ public class Game {
         int checkChoice;
         Player player1 = new Player(PlayerName1, 100, false);
         Player player2 = new Player(PlayerName2, 100, false);
+        boolean player1CanGoBack = true;
+        boolean player2CanGoBack = true;
         boolean exitGame = false;
         Stack<gameHistory> History = new Stack<>();
 
@@ -73,12 +75,12 @@ public class Game {
 
                 checkChoice = sc.nextInt();
 
-                while (checkChoice < 1 || checkChoice > 5) {
+                while ((checkChoice < 1 || checkChoice > 5) || (checkChoice == 4 && !player1CanGoBack)) {
                     System.out.print("bad choice choose again: ");
                     sc.nextLine();
                     checkChoice = sc.nextInt();
                 }
-                if (checkChoice == 4) {
+                if (checkChoice == 4 && player1CanGoBack) {
                     int howFar = Menu.showHistoryMenu(History);
                     if (howFar != -1) {
                         for (int i = 0; i < howFar - 1; i++) {
@@ -87,8 +89,10 @@ public class Game {
                         player1 = History.peek().getPlayer1();
                         player2 = History.peek().getPlayer2();
                     }
+                    player1CanGoBack = false;
                     continue;
                 }
+                
                 player1.chooseAttack(checkChoice);
 
                 Menu.clearscrn();
@@ -100,22 +104,25 @@ public class Game {
                 System.out.print(player2.getName()
                         + " choose Attack: \n1.Fire\n2.Water\n3.Earth\n4.Go back in Time\n5.Forfeit\nchoose(type the number):");
 
-                sc.nextLine();
-                checkChoice = sc.nextInt();
-                if (checkChoice < 1 || checkChoice > 5) {
-                    while (true) {
-                        System.out.print("bad choice choose again: ");
+
+
                         sc.nextLine();
-                        checkChoice = sc.nextInt();
-                    }
+                checkChoice = sc.nextInt();
+                while ((checkChoice < 1 || checkChoice > 5) || (checkChoice == 4 && !player2CanGoBack)) {
+                    System.out.print("bad choice choose again: ");
+                    sc.nextLine();
+                    checkChoice = sc.nextInt();
                 }
-                if (checkChoice == 4) {
+                if (checkChoice == 4 && player2CanGoBack ) {
                     int howFar = Menu.showHistoryMenu(History);
-                    for (int i = 0; i < howFar - 1; i++) {
-                        History.pop();
+                    if (howFar != -1) {
+                        for (int i = 0; i < howFar - 1; i++) {
+                            History.pop();
+                        }
+                        player1 = History.peek().getPlayer1();
+                        player2 = History.peek().getPlayer2();
                     }
-                    player1 = History.peek().getPlayer1();
-                    player2 = History.peek().getPlayer2();
+                    player2CanGoBack = false;
                     continue;
                 }
                 player2.chooseAttack(checkChoice);

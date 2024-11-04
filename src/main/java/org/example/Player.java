@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Queue;
 
 public class Player {
+    
     private String name;
     private int health;
     private String choice;
@@ -42,17 +43,19 @@ public class Player {
     public int gethealth(){
         return health;
     }
-
+    
     public void getCombo(){
         currentCombo.add("Fire");
         System.out.println(currentCombo.peek());
     };
+    
     public String getChoice() {
         return choice;
     }
     public String getName() {
         return name;
     }
+    
     public String chooseAttack(int choice) {
             if(currentCombo.size() == 3 && choice == 1){
                 currentCombo.poll();
@@ -94,7 +97,6 @@ public class Player {
     public int checkIfCombo(LinkedList<Combo.combo> Combos){
         boolean check = true;
         int index = 0;
-        System.out.println(getCurrentCombo().size());
         if(getCurrentCombo().size() != 3){
             return -2;
         }
