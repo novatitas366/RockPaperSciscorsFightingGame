@@ -27,7 +27,7 @@ Programos vartotojas gali (2 balai):
         nutraukti žaidimą (grįžtama į meniu), (0,2 balo) - Ne
     Nustatymai:
         pakeisti nustatymus, bent 3 parinktys, (0,6 balo) - 1 pariktis kolkas
-    Peržiūrėti kovų istoriją (kas su kuo žaidė ir kas laimėjo – istorija saugoma vienakrypčiame tiesiniame sąraše), (0,5 balo) -NE
+    Peržiūrėti kovų istoriją (kas su kuo žaidė ir kas laimėjo – istorija saugoma vienakrypčiame tiesiniame sąraše), (0,5 balo) -TAIP
     išeiti iš žaidimo. (0,2 balo) - Taip
 
 Nematomos operacijos ir funkcionalumai (5,5 balai):
@@ -36,7 +36,7 @@ Nematomos operacijos ir funkcionalumai (5,5 balai):
     realizuotos trijų tipų atakos ir jų veiksmingumas (akmuo nugali žirkles, žirklės nugali popierių ir pan.), (0,5 balo) - TAIP
     combo atakų atlikimas, skirtingų galimų kombinacijų turi būti bent 3; žaidėjo pasirinktoms atakoms kaupti naudojama eilės duomenų struktūra; jeigu surenkama combo ataka, atliekama papildoma ataka (padaroma papildomai žalos); jeigu žaidėjas gavo žalą combo rinkimo metu – combo atakos rinkimas nutrūksta, (1 balas) - Taip (reikia testuot.)
     kartą per kovą žaidėjas gali atlikti UNDO veiksmą – gįžti į kovos stadiją vienu, dviem arba trimis žingsniais atgal; tam kovos eiga yra kaupiama steke, (1 balas) - Taip
-    kovų istorija yra saugoma atskirame .json dokumente, (0,5 balo)
+    kovų istorija yra saugoma atskirame .json dokumente, (0,5 balo) - TAIP
     galimybė lošti vienam arba dviese, (1 balas) - NE
     atsitiktiniu būdu parenka kompiuterio žaidėjo ataką (papildomi balai, jeigu sugalvosite, kad kompiuteris parinktų atakas pagal žaidėjo atakų istoriją – simple AI), (0,5 balo)
     žaidėjo ir kompiuterio žaidėjo gyvybių taškai ir jų mažėjimas, (0,3 balo) - TAIP
@@ -90,7 +90,7 @@ public class Main {
         }
 
         try(FileReader reader = new FileReader("src/main/java/org/example/Json/history.json")){
-           Type historyListType = new TypeToken<List<combo>>() {
+           Type historyListType = new TypeToken<List<History>>() {
             }.getType();
             List<History> temphistories = gson.fromJson(reader, historyListType);
             if(temphistories == null){
@@ -102,7 +102,7 @@ public class Main {
         }catch(JsonSyntaxException | JsonIOException | IOException e){
             e.printStackTrace();
         }
-        menu.ShowMenu(Combos);
+        menu.ShowMenu(Combos, history);
 
     }
 }

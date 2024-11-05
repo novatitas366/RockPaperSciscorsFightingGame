@@ -5,7 +5,8 @@ import java.util.Scanner;
 import org.example.Game.gameHistory;
 public class Menu {
     static Scanner sc = new Scanner(System.in);
-    public void ShowMenu(LinkedList<Combo.combo> Combos) {
+    public void ShowMenu(LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
+        clearscrn();
         while (true) {
             
             String RESET = "\u001B[0m";
@@ -27,10 +28,11 @@ public class Menu {
             int choice = 100;
             String NewGame = "1.New Game";
             String Settings = "2.Settings";
-            String QuitGame = "3.Quit Game";
+            String QuitGame = "4.Quit Game";
             int consoleWidth = 20;
             System.out.println(" ".repeat(consoleWidth) + NewGame);
             System.out.println(" ".repeat(consoleWidth) + Settings);
+            System.out.println(" ".repeat(consoleWidth) + "3.Show history");
             System.out.println(" ".repeat(consoleWidth) + QuitGame);
             System.out.println();
             System.out.println("Select an option:");
@@ -39,18 +41,36 @@ public class Menu {
            
             switch (choice) {
                 case 1:
-                    showPlayerMenu(Combos);
+                    showPlayerMenu(Combos, histories);
                     break;
                 case 2:
                     ShowSettings();
                     break;
-
                 case 3:
+                    showHistoryMenu(histories);
+                    break;
+                case 4:
                     return;
 
                 default:
                     System.out.println("Select a valid option!");
             }
+        }
+    }
+
+    public void showHistoryMenu(LinkedList<History> histories){
+        int i=0;
+        int size = histories.size();
+        do{
+            System.out.println(i+1+". "+histories.get(i).showHistoryMenuOfGames());
+            i++;
+        }while(i != size);
+        
+        
+        System.out.println("go back(y)");
+        String choice = sc.nextLine();
+        while (!choice.equals("y")) {
+            choice = sc.nextLine();
         }
     }
 
@@ -99,7 +119,7 @@ public class Menu {
         }
     }
     
-    public static void showPlayerMenu(LinkedList<Combo.combo> Combos) {
+    public static void showPlayerMenu(LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
         clearscrn();
         System.out.println("how many players are going to play:");
         System.out.println("1. One player (play with AI)");
@@ -108,10 +128,10 @@ public class Menu {
         System.out.print("give choice: ");
         switch (sc.nextInt()) {
             case 1:
-                showPlayerCreationMenu(1, Combos);
+                showPlayerCreationMenu(1, Combos, histories);
                 break;
             case 2:
-                showPlayerCreationMenu(2, Combos);
+                showPlayerCreationMenu(2, Combos, histories);
             case 3:
                 
                 return;
@@ -121,7 +141,7 @@ public class Menu {
         
     }
 
-    public static void showPlayerCreationMenu(int choice, LinkedList<Combo.combo> Combos){
+    public static void showPlayerCreationMenu(int choice, LinkedList<Combo.combo> Combos,LinkedList<History> histories){
         clearscrn();
         if(choice == 1){
             String PlayerName;
@@ -141,7 +161,7 @@ public class Menu {
             clearscrn();
             System.out.println("what is the name of player2?");
             System.out.print("name: "); PlayerName2 = sc.nextLine();
-            Game.gameWithPlayer(PlayerName1, PlayerName2, sc, Combos);
+            Game.gameWithPlayer(PlayerName1, PlayerName2, sc, Combos, histories);
         }
         
 

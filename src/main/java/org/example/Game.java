@@ -3,6 +3,11 @@ package org.example;
 import java.util.Scanner;
 import java.util.Stack;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Game {
@@ -50,7 +55,7 @@ public class Game {
     }
 
     public static void gameWithPlayer(String PlayerName1, String PlayerName2, Scanner sc,
-        LinkedList<Combo.combo> Combos) {
+        LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
         int checkChoice;
         Player player1 = new Player(PlayerName1, 100, false);
         Player player2 = new Player(PlayerName2, 100, false);
@@ -92,6 +97,10 @@ public class Game {
                     player1CanGoBack = false;
                     continue;
                 }
+                if(checkChoice == 5){
+                    player1.forfeit();
+                    break;
+                }
                 
                 player1.chooseAttack(checkChoice);
 
@@ -125,6 +134,13 @@ public class Game {
                     player2CanGoBack = false;
                     continue;
                 }
+
+                if(checkChoice == 5){
+                    player2.forfeit();
+                    break;
+                }
+
+
                 player2.chooseAttack(checkChoice);
 
                 String message2;
@@ -160,7 +176,7 @@ public class Game {
             }
         }
         try {
-            if (player1.IsDead()) {
+            if (player1.IsDead() || player1.getForfeit()) {
                 System.out.println(" _____                             _         _       _   _                 \n" + //
                         "/  __ \\                           | |       | |     | | (_)                \n" + //
                         "| /  \\/ ___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_ _  ___  _ __  ___ \n" + //
@@ -171,7 +187,7 @@ public class Game {
                         "                   |___/                                                   ");
 
                 System.out.println(player2.getName() + " Won the game");
-            } else if (player2.IsDead()) {
+            } else if (player2.IsDead() || player2.getForfeit()) {
                 System.out.println(" _____                             _         _       _   _                 \n" + //
                         "/  __ \\                           | |       | |     | | (_)                \n" + //
                         "| /  \\/ ___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_ _  ___  _ __  ___ \n" + //
@@ -183,10 +199,22 @@ public class Game {
 
                 System.out.println(player1.getName() + " Won the game");
             }
+
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+        histories.addFirst(new History(player1, player2));
+
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter("src/main/java/org/example/Json/history.json")) {
+            gson.toJson(histories, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         System.out.println("          Quit?        ");
         System.out.println("1.Yes              2.No");
         sc.nextLine();
@@ -198,7 +226,7 @@ public class Game {
                     System.exit(0);
                     break;
                 case 2:
-                    break;
+                    return;
                 default:
                     System.out.print("bad choice, choose again:");
                     sc.nextLine();

@@ -12,6 +12,7 @@ public class Player {
     private String choice;
     private Queue <String> currentCombo = new LinkedList<>();
     private Map <String, Integer> damageValues = new HashMap<>();
+    private boolean IsQuit;
     
 
     public Queue<String> getCurrentCombo() {
@@ -44,6 +45,10 @@ public class Player {
         return health;
     }
     
+    public boolean getForfeit(){
+        return IsQuit;
+    }
+
     public void getCombo(){
         currentCombo.add("Fire");
         System.out.println(currentCombo.peek());
@@ -184,7 +189,9 @@ public class Player {
         }
         
     }
-    
+    public void forfeit(){
+        IsQuit = true;
+    }
     public boolean IsDead(){
         if(gethealth() <= 0){
             return true;
