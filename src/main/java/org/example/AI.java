@@ -1,7 +1,13 @@
 package org.example;
 
+import java.util.HashMap;
+
 public class AI extends Player {
     private static String aiDifficulty;
+
+    HashMap <String, Integer> player1Moves = new HashMap<>();
+
+
     public AI(int health, boolean AI){
         super("AI", health, AI);
         aiDifficulty = "easy";
@@ -13,6 +19,9 @@ public class AI extends Player {
 
     public String getAiDifficulty(){
         return aiDifficulty;
+    }
+    public void getplayer1choice(String choice){
+        player1Moves.merge(choice, 1, Integer::sum);
     }
     public void changeAiDifficulty(int diff){
         switch(diff){
@@ -27,7 +36,6 @@ public class AI extends Player {
                 break;
             default:
                 System.out.println("this dificulty does not exist");
-            
         }
     }
 

@@ -1,27 +1,19 @@
 package org.example;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class test {
     public static void main(String[] args){
-        Queue <Integer> eile = new LinkedList<>();
+        HashMap<String, Integer> statistic = new HashMap<>();
+        statistic.put("Fire", 0);
+        
 
-        eile.add(1);
-        eile.add(2);
-        eile.add(3);
-        eile.add(4);
-        eile.add(5);
-        for(int x : eile){
-            System.out.println(x);
+        for(int i = 0; i<100; i++){
+            statistic.put("Fire", statistic.get("Fire")+1);
+            
         }
-        eile.poll();
-        for(int x : eile){
-            System.out.println(x);
-        }
-        eile.add(6);
-        for(int x : eile){
-            System.out.println(x);
-        }
+        System.out.println(statistic);
     }
 }
