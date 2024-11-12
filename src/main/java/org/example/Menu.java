@@ -1,18 +1,21 @@
 package org.example;
+
 import java.util.Stack;
 import java.util.LinkedList;
 import java.util.Scanner;
 import org.example.Game.gameHistory;
+
 public class Menu {
     static Scanner sc = new Scanner(System.in);
+
     public void ShowMenu(LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
         clearscrn();
+        Settings settings = new Settings("easy", 2000, 10, 100);
         while (true) {
-            
+
             String RESET = "\u001B[0m";
             String RED = "\u001B[31m";
             String GREEN = "\u001B[32m";
-            
 
             System.out.println(RED +
                     " (                                (                     \r\n" +
@@ -30,6 +33,7 @@ public class Menu {
             String Settings = "2.Settings";
             String QuitGame = "4.Quit Game";
             int consoleWidth = 20;
+
             System.out.println(" ".repeat(consoleWidth) + NewGame);
             System.out.println(" ".repeat(consoleWidth) + Settings);
             System.out.println(" ".repeat(consoleWidth) + "3.Show history");
@@ -38,13 +42,13 @@ public class Menu {
             System.out.println("Select an option:");
             System.out.println();
             choice = sc.nextInt();
-           
+
             switch (choice) {
                 case 1:
-                    showPlayerMenu(Combos, histories);
+                    showPlayerMenu(Combos, histories, settings);
                     break;
                 case 2:
-                    ShowSettings();
+                    ShowSettings(settings);
                     break;
                 case 3:
                     showHistoryMenu(histories);
@@ -58,15 +62,14 @@ public class Menu {
         }
     }
 
-    public void showHistoryMenu(LinkedList<History> histories){
-        int i=0;
+    public void showHistoryMenu(LinkedList<History> histories) {
+        int i = 0;
         int size = histories.size();
-        do{
-            System.out.println(i+1+". "+histories.get(i).showHistoryMenuOfGames());
+        do {
+            System.out.println(i + 1 + ". " + histories.get(i).showHistoryMenuOfGames());
             i++;
-        }while(i != size);
-        
-        
+        } while (i != size);
+
         System.out.println("go back(y)");
         String choice = sc.nextLine();
         while (!choice.equals("y")) {
@@ -79,9 +82,7 @@ public class Menu {
         System.out.flush();
     }
 
-    private static AI comp = new AI(100, true);
-
-    public static void ShowSettings() {
+    public static void ShowSettings(Settings settings) {
         while (true) {
             clearscrn();
             System.out.println(" _______  _______  _______  _______  ___   __    _  _______  _______ \n" +
@@ -92,34 +93,42 @@ public class Menu {
                     " _____| ||   |___   |   |    |   |  |   | | | |   ||   |_| | _____| |\n" +
                     "|_______||_______|  |___|    |___|  |___| |_|  |__||_______||_______|");
 
-            System.out.println("1. change AI strength. Current - " + comp.getAiDifficulty());
-            System.out.println("4.go back");
+            System.out.println("1. change AI strength. Current - " + settings.getAiDifficulty());
+            System.out.println("2. change pause time. Current - " + settings.getMenuSpeed() + " ms.");
+            System.out.println("3. change default Health values. Current - " + settings.getDefaultHealth());
+            System.out.println("4. change default damage values. Current - " + settings.getBasicAttackDamage());
+            System.out.println("5.go back");
             System.out.println("select a choice:");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
                 case 1:
                     System.out.println("choose difficulty:\n1-easy\n2-medium(AI chooses based on probability)\n3-hard");
-                    comp.changeAiDifficulty(sc.nextInt());
+                    settings.changeAiDifficulty(sc.nextInt());
                     break;
                 case 2:
-                    System.out.println("animations: ");
+                    System.out.print("choose speed in miliseconds: ");
+                    settings.changeMenuSpeed(sc.nextInt());
                     break;
                 case 3:
-
+                    System.out.print("choose default health value: ");
+                    settings.changeDefalthHealth(sc.nextInt());
                     break;
                 case 4:
-                
+                    System.out.print("choose default damage value: ");
+                    settings.changeDefaultDamage(sc.nextInt());
+                    break;
+                case 5:
                     return;
-
                 default:
                     System.out.println("Select a valid option!");
                     break;
             }
         }
     }
-    
-    public static void showPlayerMenu(LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
+
+    public static void showPlayerMenu(LinkedList<Combo.combo> Combos, LinkedList<History> histories,
+            Settings settings) {
         clearscrn();
         System.out.println("how many players are going to play:");
         System.out.println("1. One player (play with AI)");
@@ -128,75 +137,119 @@ public class Menu {
         System.out.print("give choice: ");
         switch (sc.nextInt()) {
             case 1:
-                showPlayerCreationMenu(1, Combos, histories);
+                showPlayerCreationMenu(1, Combos, histories, settings);
                 break;
             case 2:
-                showPlayerCreationMenu(2, Combos, histories);
+                showPlayerCreationMenu(2, Combos, histories, settings);
             case 3:
-                
+
                 return;
             default:
                 System.out.println("please give a valid choice");
         }
-        
+
     }
 
-    public static void showPlayerCreationMenu(int choice, LinkedList<Combo.combo> Combos,LinkedList<History> histories){
+    public static void showPlayerCreationMenu(int choice, LinkedList<Combo.combo> Combos, LinkedList<History> histories,
+            Settings settings) {
         clearscrn();
-        if(choice == 1){
+        if (choice == 1) {
             String PlayerName;
             System.out.println("what is the player name?");
             sc.nextLine();
-            System.out.print("name: "); PlayerName = sc.nextLine();
+            System.out.print("name: ");
+            PlayerName = sc.nextLine();
             System.out.println(PlayerName);
 
-
-            Game.gameWithAI(comp, PlayerName);
-        }
-        else if(choice == 2){
+            Game.gameWithAI(PlayerName, settings, sc, Combos, histories);
+        } else if (choice == 2) {
             String PlayerName1, PlayerName2;
             System.out.println("what is the name of player1?");
             sc.nextLine();
-            System.out.print("name: "); PlayerName1 = sc.nextLine();
+            System.out.print("name: ");
+            PlayerName1 = sc.nextLine();
             clearscrn();
             System.out.println("what is the name of player2?");
-            System.out.print("name: "); PlayerName2 = sc.nextLine();
-            Game.gameWithPlayer(PlayerName1, PlayerName2, sc, Combos, histories);
+            System.out.print("name: ");
+            PlayerName2 = sc.nextLine();
+            Game.gameWithPlayer(PlayerName1, PlayerName2, sc, Combos, histories, settings);
         }
-        
 
     }
 
-    public static int showHistoryMenu(Stack<gameHistory> History){
-        while(true){
-            System.out.println("How far do you want to jump back?");
-            Stack<gameHistory> tempHist = new Stack<>();
-            for(gameHistory thing: History){
-                tempHist.push(thing);
-            }
-            int i = 1;
-            while(!tempHist.isEmpty()&& i<=3){
-                System.out.println(i+". "+tempHist.peek().getPlayer1().getName()+"  Health: "+tempHist.peek().getPlayer1().gethealth()+"  move: "+tempHist.peek().getPlayer1().getChoice()+" ".repeat(5)+ tempHist.peek().getPlayer2().getName()+"  Health: "+tempHist.peek().getPlayer2().gethealth()+"   move: "+tempHist.peek().getPlayer2().getChoice());
-                tempHist.pop();
-                i++;
-            }
+    public static int showHistoryMenu(Stack<gameHistory> History) {
+        if (!History.peek().getAIstatus()) {
+            while (true) {
+                System.out.println("How far do you want to jump back?");
+                Stack<gameHistory> tempHist = new Stack<>();
+                for (gameHistory thing : History) {
+                    tempHist.push(thing);
+                }
+                int i = 1;
+                while (!tempHist.isEmpty() && i <= 3) {
+                    System.out.println(i + ". " + tempHist.peek().getPlayer1().getName() + "  Health: "
+                            + tempHist.peek().getPlayer1().gethealth() + "  move: "
+                            + tempHist.peek().getPlayer1().getChoice() + " ".repeat(5)
+                            + tempHist.peek().getPlayer2().getName() + "  Health: "
+                            + tempHist.peek().getPlayer2().gethealth() + "   move: "
+                            + tempHist.peek().getPlayer2().getChoice());
+                    tempHist.pop();
+                    i++;
+                }
 
-            System.out.println(i+". go back");
+                System.out.println(i + ". go back");
 
-            sc.nextLine();
-            int choice = sc.nextInt();
-            while(choice < 1 && choice >i){
-                System.out.print("bad choice choose again: ");
                 sc.nextLine();
-                choice = sc.nextInt();
+                int choice = sc.nextInt();
+                while (choice < 1 && choice > i) {
+                    System.out.print("bad choice choose again: ");
+                    sc.nextLine();
+                    choice = sc.nextInt();
+                }
+                if (choice == i) {
+                    return -1;
+                } else {
+                    return choice;
+                }
+
             }
-            if(choice == i){
-                return -1;
+
+        }
+        else{
+            while (true) {
+                System.out.println("How far do you want to jump back?");
+                Stack<gameHistory> tempHist = new Stack<>();
+                for (gameHistory thing : History) {
+                    tempHist.push(thing);
+                }
+                int i = 1;
+                while (!tempHist.isEmpty() && i <= 3) {
+                    System.out.println(i + ". " + tempHist.peek().getPlayer1().getName() + "  Health: "
+                            + tempHist.peek().getPlayer1().gethealth() + "  move: "
+                            + tempHist.peek().getPlayer1().getChoice() + " ".repeat(5)
+                            + tempHist.peek().getAi().getName() + "  Health: "
+                            + tempHist.peek().getAi().gethealth() + "   move: "
+                            + tempHist.peek().getAi().getChoice());
+                    tempHist.pop();
+                    i++;
+                }
+
+                System.out.println(i + ". go back");
+
+                sc.nextLine();
+                int choice = sc.nextInt();
+                while (choice < 1 && choice > i) {
+                    System.out.print("bad choice choose again: ");
+                    sc.nextLine();
+                    choice = sc.nextInt();
+                }
+                if (choice == i) {
+                    return -1;
+                } else {
+                    return choice;
+                }
+
             }
-            else{
-                return choice;
-            }
-            
         }
     }
 }

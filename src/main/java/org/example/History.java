@@ -29,6 +29,10 @@ public class History {
             player1Won = true;
         }
     }
+
+    public boolean getIsThereAI(){
+        return isThereAI;
+    }
     public String showHistoryMenuOfGames(){
 
         if(!isThereAI &&player1.getForfeit()){

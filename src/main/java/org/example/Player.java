@@ -7,18 +7,18 @@ import java.util.Queue;
 
 public class Player {
     
-    private String name;
-    private int health;
-    private String choice;
-    private Queue <String> currentCombo = new LinkedList<>();
-    private Map <String, Integer> damageValues = new HashMap<>();
-    private boolean IsQuit;
+    protected String name;
+    protected int health;
+    protected String choice;
+    protected Queue <String> currentCombo = new LinkedList<>();
+    protected Map <String, Integer> damageValues = new HashMap<>();
+    protected boolean IsQuit;
     
 
     public Queue<String> getCurrentCombo() {
         return currentCombo;
     }
-    public Player(String name, int health, boolean AI){
+    public Player(String name, int health, boolean AI, Settings settings){
         if(AI){
             this.name = "AI";
             this.health = health;
@@ -29,9 +29,9 @@ public class Player {
         }
         this.choice = "***";
 
-        damageValues.put("Fire", 10);
-        damageValues.put("Water", 10);
-        damageValues.put("Earth", 10);
+        damageValues.put("Fire", settings.getBasicAttackDamage());
+        damageValues.put("Water", settings.getBasicAttackDamage());
+        damageValues.put("Earth", settings.getBasicAttackDamage());
     }
 
     public Player(Player other){

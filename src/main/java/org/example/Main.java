@@ -68,6 +68,7 @@ public class Main {
         Menu menu = new Menu();
         LinkedList<History> history= null; 
         LinkedList<combo> Combos = null;
+        
         try (FileReader reader = new FileReader("src/main/java/org/example/Json/combos.json")) {
 
             Type comboListType = new TypeToken<List<combo>>() {

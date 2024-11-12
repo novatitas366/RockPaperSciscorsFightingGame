@@ -16,7 +16,7 @@ public class Game {
         private Player player1;
         private Player player2;
         private AI ai;
-
+        private boolean isThereAI;
         public Player getPlayer1() {
             return player1;
         }
@@ -28,15 +28,19 @@ public class Game {
         public AI getAi() {
             return ai;
         }
-
+        public boolean getAIstatus(){
+            return isThereAI;
+        }
         public gameHistory(Player player1, Player player2) {
             this.player1 = new Player(player1);
             this.player2 = new Player(player2);
+            this.isThereAI = false;
         }
 
         public gameHistory(Player player1, AI ai) {
             this.player1 = new Player(player1);
             this.ai = new AI(ai);
+            this.isThereAI = true;
         }
 
         public gameHistory() {
@@ -45,20 +49,153 @@ public class Game {
         }
     }
 
-    public static void gameWithAI(AI ai, String PlayerName) {
-        Player player = new Player(PlayerName, 100, false);
-        if (ai.getAiDifficulty() == "easy") {
+    public static void gameWithAI(String PlayerName, Settings settings, Scanner sc, LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
+        Stack<gameHistory> History = new Stack<>();
+        boolean playerCanGoBack = true;
+        int checkChoice;
+        Player player = new Player(PlayerName, settings.getDefaultHealth(), false, settings);
+        AI ai = new AI(settings.getDefaultHealth(), false, settings);
+        try{
+        while (player.gethealth() > 0 && ai.gethealth() > 0){
+        Menu.clearscrn();
+                History.push(new gameHistory(player, ai));
+                System.out.println(
+                        player.getName() + " health: " + player.gethealth() + " ".repeat(10) + ai.getName()
+                                + " health: " + ai.gethealth());
 
-        } else if (ai.getAiDifficulty() == "medium") {
+                System.out.println(
+                        player.getName() + " Choice: " + player.getChoice() + " ".repeat(10) + ai.getName()
+                                + " choice: " + ai.getChoice());
+                System.out.print(player.getName()
+                        + " choose Attack: \n1.Fire\n2.Water\n3.Earth\n4.Go back in Time\n5.Forfeit\nchoose(type the number):");
 
+                checkChoice = sc.nextInt();
+
+                while ((checkChoice < 1 || checkChoice > 5) || (checkChoice == 4 && !playerCanGoBack)) {
+                    System.out.print("bad choice choose again: ");
+                    sc.nextLine();
+                    checkChoice = sc.nextInt();
+                }
+                if (checkChoice == 4 && playerCanGoBack) {
+                    int howFar = Menu.showHistoryMenu(History);
+                    if (howFar != -1) {
+                        for (int i = 0; i < howFar - 1; i++) {
+                            History.pop();
+                        }
+                        player = History.peek().getPlayer1();
+                        ai = History.peek().getAi();
+                    }
+                    playerCanGoBack = false;
+                    continue;
+                }
+                if(checkChoice == 5){
+                    player.forfeit();
+                    break;
+                }
+                
+                ai.getplayerchoice(player.chooseAttack(checkChoice));
+                ai.chooseAttack();
+                
+                String message2;
+                String message1;
+
+                message2 = player.damageHealth(ai.dealDamage(player.getChoice(), Combos));
+                message1 = ai.damageHealth(player.dealDamage(ai.getChoice(), Combos));
+
+                if (message1.equals("Basic")) {
+                    System.out.println(player.getName() + " used " + player.getChoice() + " and won against "
+                            + ai.getName() + " who chose " + ai.getChoice());
+                } else if (message1.equals("Combo")) {
+                    System.out.println(player.getName() + " used " + player.getChoice() + " and won against "
+                            + ai.getName() + " who chose " + ai.getChoice());
+                    System.out.println(player.getName() + " also used the Combo"
+                            + Combos.get(player.checkIfCombo(Combos)).getComboattack());
+                }
+                if (message2.equals("Basic")) {
+                    System.out.println(ai.getName() + " used " + ai.getChoice() + " and won against "
+                            + player.getName() + " who chose " + player.getChoice());
+                } else if (message2.equals("Combo")) {
+
+                    System.out.println(ai.getName() + " used " + ai.getChoice() + " and won against "
+                            + player.getName() + " who chose " + player.getChoice());
+                    System.out.println(ai.getName() + " also used the Combo"
+                            + Combos.get(ai.checkIfCombo(Combos)).getComboattack());
+                }
+                else {
+                    System.out.println("DRAW");
+                }
+
+                Thread.sleep(settings.getMenuSpeed());
+
+            }
+            if (player.IsDead() || player.getForfeit()) {
+                System.out.println(" _____                             _         _       _   _                 \n" + //
+                        "/  __ \\                           | |       | |     | | (_)                \n" + //
+                        "| /  \\/ ___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_ _  ___  _ __  ___ \n" + //
+                        "| |    / _ \\| '_ \\ / _` | '__/ _` | __| | | | |/ _` | __| |/ _ \\| '_ \\/ __|\n" + //
+                        "| \\__/\\ (_) | | | | (_| | | | (_| | |_| |_| | | (_| | |_| | (_) | | | \\__ \\\n" + //
+                        " \\____/\\___/|_| |_|\\__, |_|  \\__,_|\\__|\\__,_|_|\\__,_|\\__|_|\\___/|_| |_|___/\n" + //
+                        "                    __/ |                                                  \n" + //
+                        "                   |___/                                                   ");
+
+                System.out.println(ai.getName() + " Won the game");
+            } else if (ai.IsDead() || ai.getForfeit()) {
+                System.out.println(" _____                             _         _       _   _                 \n" + //
+                        "/  __ \\                           | |       | |     | | (_)                \n" + //
+                        "| /  \\/ ___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_ _  ___  _ __  ___ \n" + //
+                        "| |    / _ \\| '_ \\ / _` | '__/ _` | __| | | | |/ _` | __| |/ _ \\| '_ \\/ __|\n" + //
+                        "| \\__/\\ (_) | | | | (_| | | | (_| | |_| |_| | | (_| | |_| | (_) | | | \\__ \\\n" + //
+                        " \\____/\\___/|_| |_|\\__, |_|  \\__,_|\\__|\\__,_|_|\\__,_|\\__|_|\\___/|_| |_|___/\n" + //
+                        "                    __/ |                                                  \n" + //
+                        "                   |___/                                                   ");
+
+                System.out.println(player.getName() + " Won the game");
+                Thread.sleep(settings.getMenuSpeed());
+            }
+            histories.addFirst(new History(player, ai));
+
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter("src/main/java/org/example/Json/history.json")) {
+            gson.toJson(histories, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+        System.out.println("          Quit?        ");
+        System.out.println("1.Yes              2.No");
+        sc.nextLine();
+        int choice = sc.nextInt();
+        while(true){
+            switch(choice){
+                case 1:
+                    sc.close();
+                    System.exit(0);
+                    break;
+                case 2:
+                    return;
+                default:
+                    System.out.print("bad choice, choose again:");
+                    sc.nextLine();
+                    choice = sc.nextInt();
+
+            }
+        }
+
+        
+        }catch(InterruptedException e){
+            Thread.currentThread().interrupt();
+        }
+            
+
     }
 
     public static void gameWithPlayer(String PlayerName1, String PlayerName2, Scanner sc,
-        LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
+        LinkedList<Combo.combo> Combos, LinkedList<History> histories, Settings settings) {
         int checkChoice;
-        Player player1 = new Player(PlayerName1, 100, false);
-        Player player2 = new Player(PlayerName2, 100, false);
+        Player player1 = new Player(PlayerName1, 100, false, settings);
+        Player player2 = new Player(PlayerName2, 100, false, settings);
         boolean player1CanGoBack = true;
         boolean player2CanGoBack = true;
         boolean exitGame = false;
@@ -200,7 +337,7 @@ public class Game {
                 System.out.println(player1.getName() + " Won the game");
             }
 
-            Thread.sleep(2000);
+            Thread.sleep(settings.getMenuSpeed());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

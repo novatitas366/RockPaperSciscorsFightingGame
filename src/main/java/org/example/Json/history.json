@@ -1,9 +1,9 @@
 [
   {
     "player1": {
-      "name": "rtjhghjbvnmvbjgh",
-      "health": 100,
-      "choice": "***",
+      "name": "l",
+      "health": 80,
+      "choice": "Fire",
       "currentCombo": [],
       "damageValues": {
         "Water": 10,
@@ -12,250 +12,16 @@
       },
       "IsQuit": true
     },
-    "player2": {
-      "name": "sdfgxcvbgfthft",
-      "health": 100,
-      "choice": "***",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
     "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "sfghjk",
+    "ai": {
+      "round": 1,
+      "player1Moves": {
+        "Fire": 3
+      },
+      "name": "AI",
       "health": 90,
       "choice": "Water",
       "currentCombo": [
-        "Water"
-      ],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player2": {
-      "name": "hbmn bvnvbn",
-      "health": 100,
-      "choice": "Water",
-      "currentCombo": [
-        "Water"
-      ],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": true
-    },
-    "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "qwertyuiop",
-      "health": 100,
-      "choice": "Fire",
-      "currentCombo": [
-        "Fire"
-      ],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player2": {
-      "name": "wertyuiop",
-      "health": 100,
-      "choice": "***",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": true
-    },
-    "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "qwesa",
-      "health": 90,
-      "choice": "Water",
-      "currentCombo": [
-        "Water"
-      ],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": true
-    },
-    "player2": {
-      "name": "rwet",
-      "health": 100,
-      "choice": "Water",
-      "currentCombo": [
-        "Water"
-      ],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "ghj",
-      "health": 90,
-      "choice": "Fire",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": true
-    },
-    "player2": {
-      "name": "rty",
-      "health": 100,
-      "choice": "Water",
-      "currentCombo": [
-        "Water"
-      ],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "jkl;",
-      "health": 100,
-      "choice": "Fire",
-      "currentCombo": [
-        "Fire"
-      ],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": true
-    },
-    "player2": {
-      "name": "890",
-      "health": 100,
-      "choice": "***",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "fgk",
-      "health": 100,
-      "choice": "***",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": true
-    },
-    "player2": {
-      "name": "hjkl",
-      "health": 100,
-      "choice": "***",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "test",
-      "health": 100,
-      "choice": "***",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": true
-    },
-    "player2": {
-      "name": "test1",
-      "health": 100,
-      "choice": "***",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player1Won": false,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "asd",
-      "health": 0,
-      "choice": "Fire",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
-      },
-      "IsQuit": false
-    },
-    "player2": {
-      "name": "adgjky",
-      "health": 100,
-      "choice": "Water",
-      "currentCombo": [
-        "Water",
         "Water",
         "Water"
       ],
@@ -266,19 +32,29 @@
       },
       "IsQuit": false
     },
-    "player1Won": false,
-    "isThereAI": false
+    "isThereAI": true
   },
   {
     "player1": {
-      "name": "nova",
+      "name": "l",
       "health": 100,
-      "choice": "Fire",
-      "currentCombo": [
-        "Fire",
-        "Fire",
-        "Fire"
-      ],
+      "choice": "***",
+      "currentCombo": [],
+      "damageValues": {
+        "Water": 10,
+        "Earth": 10,
+        "Fire": 10
+      },
+      "IsQuit": true
+    },
+    "player1Won": false,
+    "ai": {
+      "round": 0,
+      "player1Moves": {},
+      "name": "AI",
+      "health": 100,
+      "choice": "***",
+      "currentCombo": [],
       "damageValues": {
         "Water": 10,
         "Earth": 10,
@@ -286,8 +62,11 @@
       },
       "IsQuit": false
     },
-    "player2": {
-      "name": "titas",
+    "isThereAI": true
+  },
+  {
+    "player1": {
+      "name": "l",
       "health": 0,
       "choice": "Earth",
       "currentCombo": [],
@@ -298,30 +77,20 @@
       },
       "IsQuit": false
     },
-    "player1Won": true,
-    "isThereAI": false
-  },
-  {
-    "player1": {
-      "name": "bro",
-      "health": 0,
-      "choice": "Fire",
-      "currentCombo": [],
-      "damageValues": {
-        "Water": 10,
-        "Earth": 10,
-        "Fire": 10
+    "player1Won": false,
+    "ai": {
+      "round": 0,
+      "player1Moves": {
+        "Earth": 6,
+        "Water": 6,
+        "Fire": 8
       },
-      "IsQuit": false
-    },
-    "player2": {
-      "name": "bro2",
-      "health": 100,
-      "choice": "Water",
+      "name": "AI",
+      "health": 60,
+      "choice": "Fire",
       "currentCombo": [
-        "Water",
-        "Water",
-        "Water"
+        "Fire",
+        "Fire"
       ],
       "damageValues": {
         "Water": 10,
@@ -330,7 +99,36 @@
       },
       "IsQuit": false
     },
+    "isThereAI": true
+  },
+  {
+    "player1": {
+      "name": "fghfgh",
+      "health": 100,
+      "choice": "***",
+      "currentCombo": [],
+      "damageValues": {
+        "Water": 10,
+        "Earth": 10,
+        "Fire": 10
+      },
+      "IsQuit": true
+    },
     "player1Won": false,
-    "isThereAI": false
+    "ai": {
+      "round": 0,
+      "player1Moves": {},
+      "name": "AI",
+      "health": 100,
+      "choice": "***",
+      "currentCombo": [],
+      "damageValues": {
+        "Water": 10,
+        "Earth": 10,
+        "Fire": 10
+      },
+      "IsQuit": false
+    },
+    "isThereAI": true
   }
 ]
