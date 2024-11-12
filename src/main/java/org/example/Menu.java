@@ -10,7 +10,7 @@ public class Menu {
 
     public void ShowMenu(LinkedList<Combo.combo> Combos, LinkedList<History> histories) {
         clearscrn();
-        Settings settings = new Settings("easy", 2000, 10, 100);
+        Settings settings = new Settings("easy", 3000, 10, 100);
         while (true) {
 
             String RESET = "\u001B[0m";

@@ -98,30 +98,32 @@ public class Game {
                 
                 String message2;
                 String message1;
+                int playerdamage = player.dealDamage(ai.getChoice(), Combos);
+                int aiDamage = ai.dealDamage(player.getChoice(), Combos);
 
                 message2 = player.damageHealth(ai.dealDamage(player.getChoice(), Combos));
                 message1 = ai.damageHealth(player.dealDamage(ai.getChoice(), Combos));
 
                 if (message1.equals("Basic")) {
                     System.out.println(player.getName() + " used " + player.getChoice() + " and won against "
-                            + ai.getName() + " who chose " + ai.getChoice());
+                            + ai.getName() + " who chose " + ai.getChoice()+" Damage dealt: " + playerdamage);
                 } else if (message1.equals("Combo")) {
                     System.out.println(player.getName() + " used " + player.getChoice() + " and won against "
                             + ai.getName() + " who chose " + ai.getChoice());
                     System.out.println(player.getName() + " also used the Combo"
-                            + Combos.get(player.checkIfCombo(Combos)).getComboattack());
+                            + Combos.get(player.checkIfCombo(Combos)).getComboattack() + " Damage dealt: " +(playerdamage+settings.getBasicAttackDamage()));
                 }
                 if (message2.equals("Basic")) {
                     System.out.println(ai.getName() + " used " + ai.getChoice() + " and won against "
-                            + player.getName() + " who chose " + player.getChoice());
+                            + player.getName() + " who chose " + player.getChoice() + " Damage dealt: "+aiDamage);
                 } else if (message2.equals("Combo")) {
 
                     System.out.println(ai.getName() + " used " + ai.getChoice() + " and won against "
                             + player.getName() + " who chose " + player.getChoice());
                     System.out.println(ai.getName() + " also used the Combo"
-                            + Combos.get(ai.checkIfCombo(Combos)).getComboattack());
+                            + Combos.get(ai.checkIfCombo(Combos)).getComboattack() + " Damage dealt: " +(aiDamage+settings.getBasicAttackDamage()));
                 }
-                else {
+                if(message1.equals("Zero") && message2.equals("Zero")){
                     System.out.println("DRAW");
                 }
 
@@ -282,30 +284,35 @@ public class Game {
 
                 String message2;
                 String message1;
-
-                message2 = player1.damageHealth(player2.dealDamage(player1.getChoice(), Combos));
-                message1 = player2.damageHealth(player1.dealDamage(player2.getChoice(), Combos));
+                int player1damage = player1.dealDamage(player2.getChoice(), Combos);
+                int player2damage = player2.dealDamage(player1.getChoice(), Combos);
+                message2 = player1.damageHealth(player2damage);
+                message1 = player2.damageHealth(player1damage);
 
                 if (message1.equals("Basic")) {
                     System.out.println(player1.getName() + " used " + player1.getChoice() + " and won against "
-                            + player2.getName() + " who chose " + player2.getChoice());
+                            + player2.getName() + " who chose " + player2.getChoice() + " Damage dealt: "+player1damage);
                 } else if (message1.equals("Combo")) {
                     System.out.println(player1.getName() + " used " + player1.getChoice() + " and won against "
                             + player2.getName() + " who chose " + player2.getChoice());
                     System.out.println(player1.getName() + " also used the Combo"
-                            + Combos.get(player1.checkIfCombo(Combos)).getComboattack());
+                            + Combos.get(player1.checkIfCombo(Combos)).getComboattack()+ " Damage dealt: "+(player1damage+settings.getBasicAttackDamage()));
                 }
                 if (message2.equals("Basic")) {
                     System.out.println(player2.getName() + " used " + player2.getChoice() + " and won against "
-                            + player1.getName() + " who chose " + player1.getChoice());
+                            + player1.getName() + " who chose " + player1.getChoice() + " Damage dealt: "+player2damage);
                 } else if (message2.equals("Combo")) {
 
                     System.out.println(player2.getName() + " used " + player2.getChoice() + " and won against "
                             + player1.getName() + " who chose " + player1.getChoice());
                     System.out.println(player2.getName() + " also used the Combo"
-                            + Combos.get(player2.checkIfCombo(Combos)).getComboattack());
+                            + Combos.get(player2.checkIfCombo(Combos)).getComboattack() + " Damage dealt: "+(player2damage+settings.getBasicAttackDamage()));
                 }
-                Thread.sleep(2000);
+
+                if(message1.equals("Zero") && message1.equals("Zero")){
+                    System.out.println("DRAW");
+                }
+                Thread.sleep(settings.getMenuSpeed());
             }
 
             catch (InterruptedException e) {

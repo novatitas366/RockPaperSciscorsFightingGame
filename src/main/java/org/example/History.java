@@ -41,7 +41,9 @@ public class History {
         else if(!isThereAI &&player2.getForfeit()){
             return player1.getName()+" vs "+player2.getName()+", "+player2.getName()+" forfeited";
         }
-
+        else if(isThereAI && player1.getForfeit()){
+            return player1.getName()+" vs "+ai.getName()+", "+player1.getName()+" forfeited";
+        }
         else if(isThereAI && player1Won){
             return player1.getName()+" vs "+ai.getName()+", "+player1.getName()+" won";
         }
