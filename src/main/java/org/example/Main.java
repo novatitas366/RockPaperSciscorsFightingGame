@@ -30,16 +30,6 @@ public class Main {
         } catch (JsonSyntaxException | JsonIOException | IOException e) {
             e.printStackTrace();
         }
-        try (FileReader reader = new FileReader("src/main/java/org/example/Json/combos.json")) {
-
-            Type comboListType = new TypeToken<List<combo>>() {
-            }.getType();
-
-            List<combo> tempCombos = gson.fromJson(reader, comboListType);
-            Combos = new LinkedList<>(tempCombos);
-        } catch (JsonSyntaxException | JsonIOException | IOException e) {
-            e.printStackTrace();
-        }
 
         try(FileReader reader = new FileReader("src/main/java/org/example/Json/history.json")){
            Type historyListType = new TypeToken<List<History>>() {
